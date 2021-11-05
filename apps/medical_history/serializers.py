@@ -10,11 +10,10 @@ class MedicalHistorySerializer(serializers.ModelSerializer):
         model = MedicalHistory
         fields = '__all__'
 
-
-class MedicalHistoryDetailSerializer(serializers.ModelSerializer):
-    patient = PatientSerializer(many=False)
-    medical_check = MedicalCheckSerializer(many=False)
-
-    class Meta:
-        model = MedicalHistory
-        fields = '__all__'
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        if instance.patient:
+            data['patient'] = PatientSerializer(instance.patient, context=self.context).data
+        if instance.medical_check:
+            data['medical_check'] = MedicalCheckSerializer(instance.medical_check, context=self.context).data
+        return data
