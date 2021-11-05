@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'django_filters',
     'corsheaders',
     'rest_framework',
-    'apps.medical_history',
     'apps.medical_check',
     'apps.patient',
 ]

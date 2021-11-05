@@ -1,8 +1,11 @@
 from django.db import models
 
-
 # Create your models here.
+from apps.patient.models import Patient
+
+
 class MedicalCheck(models.Model):
+    patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
     weight = models.FloatField(blank=False, null=False)
     temperature = models.FloatField(blank=False, null=False)
     pressure = models.FloatField(blank=False, null=False)
